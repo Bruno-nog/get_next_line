@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:40:59 by brunogue          #+#    #+#             */
-/*   Updated: 2024/11/25 18:07:15 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:36:03 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ char *get_next_line(int fd);
 t_fd_node *get_fd_node(t_fd_node **head, int fd);
 void remove_fd_node(t_fd_node **head, int fd);
 int ft_strlen(const char *str);
-char *str_join(char *s1, char *s2);
+char *ft_strjoin(char *s1, char *s2);
 int find_newline(const char *str);
 char *extract_line(char *remainder);
 char *update_remainder(char *remainder);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif

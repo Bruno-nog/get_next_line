@@ -143,3 +143,5 @@ Implemente a estrutura t_fd_node.
 Crie a função get_fd_node para gerenciar os nós.
 Atualize o get_next_line para usar a linked list.
 Se precisar de mais ajuda em algum passo, posso detalhar cada parte!
+
+
