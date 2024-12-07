@@ -6,11 +6,52 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:35:48 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/06 18:20:37 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:45:13 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_add_end(t_gnl_list **lst, char *buffer)
+{
+	t_gnl_list	*last_node;
+	t_gnl_list	*new_node;
+	
+	if (!buffer[0])
+		return (free(buffer))
+	new_node = malloc(sizeof(t_gnl_list));
+	if (!new_node)
+	{
+		free(buffer);
+		return (ft_del(lst));
+	}
+	last_node = ft_last_node(lst);
+	if (!last_node)
+		*lst = new_node;
+	else
+		last_node->nex = new_node;
+	new_node->content = buffer;
+	new_node->next = NULL;
+}
+
+char	*ft_new_line(t_gnl_list **lst, char *line, int lenght_line)
+{
+	t_gnl_list *temp;
+	int			displacer;
+	
+	temp = *lst;
+	displacer = 0;
+	lenght_line += ft_cont_size(temp);
+	lne = (char *)malloc(sizeof(char) * (lenght_line + 1));
+	if (!line)
+	{
+		ft_del(lst);
+		return (NULL);
+	}
+	displacer = ft_cpylst(temp, line, displacer);
+	line[lenght_line] = '\0';
+	return (line);
+}
 
 void	ft_lstnew(t_gnl_list **lst, int fd)
 {
@@ -30,8 +71,29 @@ void	ft_lstnew(t_gnl_list **lst, int fd)
 			return ;
 		}
 		buffer[char_read] = '\0';
-		ft_
+		ft_add_end(lst, buffer);
 	}
+}
+
+void ft_lstclear(t_gnl_list **lst)
+{
+	t_gnl_list	*last_node;
+	int			i;
+	int			x;
+	char		*buffer;
+
+	i = 0;
+	x = 0;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (ft_del(lst));
+	last_node = ft_last_node(lst);
+	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
+		++i;
+	while (last_node -> content[i] != '\0' && last_node-> content[++i])
+		buffer[x] = '\0';
+	ft_del(lst);
+	ft_add_end(lst, buffer);
 }
 
 char	*get_next_line(int fd)

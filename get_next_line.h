@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:36:08 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/06 17:52:20 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:26:44 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <string.h>
 
 typedef struct s_gnl_list
 {
@@ -27,6 +28,9 @@ typedef struct s_gnl_list
 	struct s_gnl_list	*next;
 }	t_gnl_list;
 
+char	*get_next_line(int fd);
+void	ft_lstnew(t_gnl_list **lst, int fd);
+void	ft_add_end(t_gnl_list **lst, char *buffer);
 
 
 #endif
