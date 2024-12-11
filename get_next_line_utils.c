@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:40:29 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/07 18:32:21 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:06:58 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,80 +15,80 @@
 t_gnl_list	*ft_last_node(t_gnl_list **lst)
 {
 	t_gnl_list	*temp;
-	
+
 	temp = *lst;
 	if (temp == NULL)
 		return (temp);
-	while (temp -> next != NULL)
-		temp = temp -> next;
+	while (temp->next != NULL)
+		temp = temp->next;
 	return (temp);
 }
 
-int	found_newline(t_gnl_list *lst)
+int	ft_found_newline(t_gnl_list *lst)
 {
 	int	i;
-	
-	if (lst)
+
+	if (!lst)
 		return (0);
 	while (lst)
 	{
 		i = 0;
-		while  (lst -> content[i] && i < BUFFER_SIZE)
+		while (lst->content[i] && i < BUFFER_SIZE)
 		{
-			if (lst -> content[i] == '\n' || lst -> content[i] == '\0')
+			if (lst->content[i] == '\n' || lst->content[i] == '\0')
 				return (1);
-			++i;	
+			++i;
 		}
-		lst = lst -> next;
+		lst = lst->next;
 	}
 	return (0);
 }
 
-int	ft_cont_size(t_gnl_list *temp)
+int	ft_line_size(t_gnl_list *temp)
 {
 	int	i;
-	int	x;
-	
+	int	k;
+
+	k = 0;
 	i = 0;
-	x = 0;
 	while (temp)
 	{
 		i = 0;
-		while (temp -> content[i])
+		while (temp->content[i])
 		{
-			if (temp -> content[i] == '\n')
-				return (++x);
+			if (temp->content[i] == '\n')
+				return (++k);
 			++i;
-			++x;
+			++k;
 		}
-		temp = temp -> next;
+		temp = temp->next;
 	}
-	return (x);
+	return (k);
 }
 
-int	ft_cpylst(t_gnl_list *temp, char *line, int displacer)
+int	ft_copy_to_line(t_gnl_list *temp, char *line, int displacer)
 {
 	int	i;
 
-	i = 0;
 	while (temp)
 	{
-		while (temp -> content[i] != '\0')
+		i = 0;
+		while (temp->content[i] != '\0')
 		{
-			if (temp -> content[i] == '\n')
-				return (line[displacer++] = temp -> content[i]);
+			if (temp->content[i] == '\n')
+				return (line[displacer++] = temp->content[i]);
 			else
-				line[displacer++] = temp -> content[i++];
+				line[displacer++] = temp->content[i++];
 		}
-		temp = temp -> next;
+		temp = temp->next;
 	}
-	return (dispĺacer);
+	return (displacer);
 }
 
 void	ft_del(t_gnl_list **lst)
 {
-	t_gnl_list *temp;
-	
+	t_gnl_list	*temp;
+
 	if (!lst)
 		return ;
 	while (*lst)
