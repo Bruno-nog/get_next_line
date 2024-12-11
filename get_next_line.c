@@ -6,7 +6,7 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:35:48 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/07 16:45:13 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:04:15 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 	
 	line = NULL;
 	lenght_line = 0;
-	if(read(fd, &line, 0) < 0)
+	if(read(fd, &line, BUFFER_SIZE) < 0)
 	{
 		ft_del(&lst);
 		return (NULL);
@@ -120,33 +120,3 @@ char	*get_next_line(int fd)
 	ft_lstclear(&lst);
 	return (line);
 }
-
-
-/*
-int	main(void)
-{
-	int		fd;
-	char	*rslt;
-
-	fd = open("file.txt", O_RDONLY);
-	rslt = get_next_line(fd);
-	printf("line -> %s", rslt);
-	return (0);
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*putito;
-
-	fd = open("test.txt", O_RDONLY);
-	putito = get_next_line(fd);
-	while (putito)
-	{
-		printf("%s", putito);
-		free(putito);
-		putito = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-}*/
