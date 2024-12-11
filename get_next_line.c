@@ -6,12 +6,13 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:35:48 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/11 13:06:48 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:12:26 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/*
 void	ft_add_end(t_gnl_list **lst, char *buf)
 {
 	t_gnl_list	*new_node;
@@ -75,6 +76,24 @@ char	*ft_extract_line(t_gnl_list **lst, char *line, int lenght_line)
 	return (line);
 }
 
+// char	*ft_extract_line(t_gnl_list **lst, char *line, int lenght_line)
+// {
+// 	t_gnl_list	*temp;
+// 	int			displacer;
+
+// 	temp = *lst;
+// 	displacer = 0;
+// 	lenght_line += ft_line_size(temp);
+// 	line = (char *)malloc(sizeof(char) * (lenght_line + 1));
+// 	if (!line)
+// 	{
+// 		ft_del(lst);
+// 		return (NULL);
+// 	}
+// 	line = ft_copy_to_line(temp, line);
+// 	return (line);
+// }
+
 void	ft_lstnew(t_gnl_list **lst, int fd)
 {
 	int		char_read;
@@ -116,8 +135,13 @@ char	*get_next_line(int fd)
 	if (lst == NULL)
 		return (NULL);
 	line = ft_extract_line(&lst, line, lenght_line);
-	if (lst == NULL)
+	if (lst == NULL || line == NULL)
+	{
+		free(line);
+		ft_del(lst);
 		return (NULL);
+	}
 	ft_lstclear(&lst);
 	return (line);
 }
+*/
