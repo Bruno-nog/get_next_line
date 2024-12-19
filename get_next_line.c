@@ -6,13 +6,12 @@
 /*   By: brunogue <brunogue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:35:48 by brunogue          #+#    #+#             */
-/*   Updated: 2024/12/11 19:12:26 by brunogue         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:00:09 by brunogue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
 void	ft_add_end(t_gnl_list **lst, char *buf)
 {
 	t_gnl_list	*new_node;
@@ -57,56 +56,38 @@ void	ft_lstclear(t_gnl_list **lst)
 	ft_add_end(lst, buf);
 }
 
-char	*ft_extract_line(t_gnl_list **lst, char *line, int lenght_line)
+char	*ft_extract_line(t_gnl_list **lst)
 {
 	t_gnl_list	*temp;
-	int			displacer;
+	int			lenght_line;
+	char		*line;
 
 	temp = *lst;
-	displacer = 0;
-	lenght_line += ft_line_size(temp);
+	lenght_line = ft_line_size(temp);
 	line = (char *)malloc(sizeof(char) * (lenght_line + 1));
-	if (!line)
-	{
-		ft_del(lst);
-		return (NULL);
-	}
-	displacer = ft_copy_to_line(temp, line, displacer);
+	ft_copy_to_line(temp, line);
 	line[lenght_line] = '\0';
 	return (line);
 }
-
-// char	*ft_extract_line(t_gnl_list **lst, char *line, int lenght_line)
-// {
-// 	t_gnl_list	*temp;
-// 	int			displacer;
-
-// 	temp = *lst;
-// 	displacer = 0;
-// 	lenght_line += ft_line_size(temp);
-// 	line = (char *)malloc(sizeof(char) * (lenght_line + 1));
-// 	if (!line)
-// 	{
-// 		ft_del(lst);
-// 		return (NULL);
-// 	}
-// 	line = ft_copy_to_line(temp, line);
-// 	return (line);
-// }
 
 void	ft_lstnew(t_gnl_list **lst, int fd)
 {
 	int		char_read;
 	char	*temp_buf;
 
-	char_read = 0;
 	while (!ft_found_newline(*lst))
 	{
-		temp_buf = malloc(BUFFER_SIZE + 1);
+		temp_buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (temp_buf == NULL)
 			return (ft_del(lst));
 		char_read = read(fd, temp_buf, BUFFER_SIZE);
-		if (!char_read)
+		if (char_read == -1)
+		{
+			free(temp_buf);
+			ft_del(lst);
+			return ;
+		}
+		if (char_read == 0)
 		{
 			free(temp_buf);
 			return ;
@@ -120,28 +101,18 @@ char	*get_next_line(int fd)
 {
 	static t_gnl_list	*lst = NULL;
 	char				*line;
-	int					lenght_line;
 
-	line = NULL;
-	lenght_line = 0;
-	if (read(fd, &line, BUFFER_SIZE) < 0)
-	{
-		ft_del(&lst);
-		return (NULL);
-	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	ft_lstnew(&lst, fd);
 	if (lst == NULL)
 		return (NULL);
-	line = ft_extract_line(&lst, line, lenght_line);
-	if (lst == NULL || line == NULL)
+	line = ft_extract_line(&lst);
+	if (!line)
 	{
-		free(line);
-		ft_del(lst);
+		ft_del(&lst);
 		return (NULL);
 	}
 	ft_lstclear(&lst);
 	return (line);
 }
-*/
